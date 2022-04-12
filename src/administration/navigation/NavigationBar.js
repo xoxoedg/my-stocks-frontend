@@ -1,9 +1,5 @@
-import React, {Component} from 'react';
-import SideNavigationBar from "./SideNavigationBar";
+function NavigationBar() {
 
-class NavigationBar extends Component{
-
-    render() {
         return (
 
             <nav>
@@ -14,12 +10,12 @@ class NavigationBar extends Component{
                         <li><a href="#">JavaScript</a></li>
                     </ul>
                 </div>
-
             </nav>
 
-        );
+        )
     }
 
-}
+
 
 export default NavigationBar;
+

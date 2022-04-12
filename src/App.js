@@ -1,7 +1,5 @@
-import NavigationBar from "./admin/NavigationBar";
-import MappingInput from "./admin/MappingInput";
-import AdminDashbord from "./admin/AdminDashbord";
-import SideNavigationBar from "./admin/SideNavigationBar";
+import NavigationBar from "./administration/navigation/NavigationBar";
+import LookupDashboard from "./administration/look-ups/dashboard/LookupDashboard";
 
 function App() {
   return (
@@ -9,9 +7,7 @@ function App() {
       <header className="App-header">
         < NavigationBar />
       </header>
-      <MappingInput/>
-        <AdminDashbord />
-        <SideNavigationBar/>
+        <LookupDashboard />
     </div>
   );
 }

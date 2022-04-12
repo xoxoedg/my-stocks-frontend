@@ -1,5 +1,5 @@
 import NavigationBar from "./administration/navigation/NavigationBar";
-import LookupDashboard from "./administration/look-ups/dashboard/LookupDashboard";
+import LookupTable from "./administration/look-ups/dashboard/LookupTable";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       </header>
 
 
-        <LookupDashboard />
+        <LookupTable />
     </div>
   );
 }

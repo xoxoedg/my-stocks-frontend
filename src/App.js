@@ -7,6 +7,8 @@ function App() {
       <header className="App-header">
         < NavigationBar />
       </header>
+
+
         <LookupDashboard />
     </div>
   );

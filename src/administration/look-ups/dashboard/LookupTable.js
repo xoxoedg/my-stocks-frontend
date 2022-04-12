@@ -1,18 +1,17 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
+import LookupData from "./LookupData";
 
 function LookupTable() {
     const [data, setData] = useState([])
-    //
-    // "
-    // function getRequest() {
-    //     axios.get(url).then(response => setData(response.data));
-    // }
+
 
     useEffect(() => {
         const url = "http://127.0.0.1:5000/administration/lookups";
         axios.get(url).then(response => setData(response.data));
-    },[data])
+    },[])
+
+
 
     return (
         <table>
@@ -24,13 +23,10 @@ function LookupTable() {
             </tr>
             </thead>
             <tbody>
-            {data.map(a =>   <tr>
-                <td>{a.app_name}</td>
-                <td>{a.api_name}</td>
-                <td><i className="material-icons">delete</i>
-                    <i className="material-icons">edit</i>
-                </td>
-                </tr>)}
+            {data.map(lookup => <LookupData
+                    key={lookup.app_name}
+                    app={lookup.app_name}
+                    api={lookup.api_name}/>)}
             </tbody>
         </table>
     )

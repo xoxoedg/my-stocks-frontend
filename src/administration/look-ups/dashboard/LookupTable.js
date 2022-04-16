@@ -36,6 +36,7 @@ function LookupTable() {
     }
 
     function editHandler(lookupEntry, app) {
+        console.log(lookupEntry)
         requestHandler.handleEditLookupRequest(lookupEntry)
         setLookupRequestData( lookupRequestData.map(lookup => lookup.app_name === app ? lookupEntry:lookup))
 

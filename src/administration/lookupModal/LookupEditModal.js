@@ -16,7 +16,7 @@ function LookupEditModal(props) {
 
 
     const handleClickOpen = () => {
-        console.log(props.app)
+
         props.onPrefill(props.app).then(prefillData => {
             console.log(prefillData)
             setApiName(prefillData.data.api_name)
@@ -34,6 +34,7 @@ function LookupEditModal(props) {
     function onSubmitHandler(event) {
         event.preventDefault()
         const requestBody = {
+            old_app_name: props.app,
             app_name: appName,
             api_name: apiName,
         }

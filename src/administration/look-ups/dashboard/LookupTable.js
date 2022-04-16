@@ -5,13 +5,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import LookupModal from "../../lookupModal/LookupModal";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import LookupData from "./LookupData";
 
 
 function LookupTable() {
+    const [lookupRequestData, setLookupRequestData] = useState([])
+    const url = "http://127.0.0.1:5000/administration/lookups"
+
+    useEffect(() => {
+        axios.get(url).then(response => setLookupRequestData(response.data));
+        }, [])
+
+
 
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin:"auto", marginTop: 20, padding:"3%"}} center>
@@ -21,51 +29,15 @@ function LookupTable() {
                         <TableCell align="center">Dessert (100g serving)</TableCell>
                         <TableCell align="right">dasa</TableCell>
                         <TableCell align="right">sss</TableCell>
-                        <TableCell align="right">123</TableCell>
-                        <TableCell align="right">Calories</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                        <TableCell align="center">123123</TableCell>
-                        <TableCell align="right">123123</TableCell>
-                        <TableCell align="right">was</TableCell>
-                        <TableCell align="right">das</TableCell>
-                        <TableCell align="right">
-                            <DeleteIcon sx={{cursor: "pointer"}}/>
-                            <EditIcon/>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell align="center">123123</TableCell>
-                        <TableCell align="right">123123</TableCell>
-                        <TableCell align="right">was</TableCell>
-                        <TableCell align="right">das</TableCell>
-                        <TableCell align="right">
-                            <DeleteIcon/>
-                            <EditIcon/>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell align="center">123123</TableCell>
-                        <TableCell align="right">123123</TableCell>
-                        <TableCell align="right">was</TableCell>
-                        <TableCell align="right">das</TableCell>
-                        <TableCell align="right">
-                            <DeleteIcon/>
-                            <EditIcon/>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell align="center">123123</TableCell>
-                        <TableCell align="right">123123</TableCell>
-                        <TableCell align="right">was</TableCell>
-                        <TableCell align="right">das</TableCell>
-                        <TableCell align="right">
-                            <DeleteIcon/>
-                            <EditIcon/>
-                        </TableCell>
-                    </TableRow>
+
+                    {lookupRequestData.map(lookup => <LookupData
+                        key={lookup.app_name}
+                        app={lookup.app_name}
+                        api={lookup.api_name}/>)}
+
 
                 </TableBody>
             </Table>

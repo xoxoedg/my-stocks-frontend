@@ -8,10 +8,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {useState} from "react";
 import {Grid} from "@mui/material";
 
-function LookupModal() {
+function LookupModal(props) {
     const [fullWidth, setFullWidth] = useState(true);
-    // const [appName, setAppName] = useState("")
-    // const [apiName, setApiName] = useState("")
+    const [appName, setAppName] = useState("")
+    const [apiName, setApiName] = useState("")
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -22,20 +22,22 @@ function LookupModal() {
         setOpen(false);
     };
 
-    //
-    // function onSubmitHandler() {
-    //     const url = "http://127.0.0.1:5000/administration//lookups/anlegen"
-    //     const requestBody = {
-    //         app_name: appName,
-    //         api_name: appName,
-    //     }
-    //     axios.post(url, {body: requestBody})
-    // }
-    //
-    // function apiNameChangeHandler(event) {
-    //     setApiName(event.target.value)
-    // }
 
+    function onSubmitHandler(event) {
+        const requestBody = {
+            app_name: appName,
+            api_name: appName,
+        }
+        props.onSubmit(requestBody)
+    }
+
+    function apiNameOnChangeHandler(event) {
+        setApiName(event.target.value)
+    }
+
+    function appNameOnChangeHandler(event) {
+        setAppName(event.target.value)
+    }
 
     return (
         <div>
@@ -45,7 +47,7 @@ function LookupModal() {
 
             <Dialog open={open} onClose={handleClose}
                     fullWidth={fullWidth}>
-                <form>
+                <form onSubmit={onSubmitHandler}>
 
 
                     <DialogTitle>Enter new Lookup</DialogTitle>
@@ -56,12 +58,14 @@ function LookupModal() {
                                     label="Api Name"
                                     variant="outlined"
                                     fullWidth
+                                    onChange={apiNameOnChangeHandler}
                                 />
                             </Grid>
                             <Grid item xs={12} xm={12} xl={12}>
                                 <TextField
                                     label="App Name"
-                                    fullWidth/>
+                                    fullWidth
+                                    onChange={appNameOnChangeHandler}/>
                             </Grid>
                         </Grid>
                     </DialogContent>

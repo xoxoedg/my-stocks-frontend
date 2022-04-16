@@ -14,21 +14,29 @@ import LookupData from "./LookupData";
 function LookupTable() {
     const [lookupRequestData, setLookupRequestData] = useState([])
     const url = "http://127.0.0.1:5000/administration/lookups"
+    const url2 = "http://127.0.0.1:5000/administration/lookups/anlegen"
 
     useEffect(() => {
         axios.get(url).then(response => setLookupRequestData(response.data));
         }, [])
 
+    function anlegenHandler(neuerEintrag) {
+        axios.post(url2, neuerEintrag);
+        setLookupRequestData(prevLookupRequestData => {
+            return [...prevLookupRequestData, neuerEintrag]
+        })
+    }
 
+    console.log(lookupRequestData)
 
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin:"auto", marginTop: 20, padding:"3%"}} center>
             <Table sx={{minWidth: 400,  }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Dessert (100g serving)</TableCell>
-                        <TableCell align="right">dasa</TableCell>
-                        <TableCell align="right">sss</TableCell>
+                        <TableCell align="center">App Name</TableCell>
+                        <TableCell align="center">Api Name</TableCell>
+                        <TableCell align="center">Edit</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -43,7 +51,7 @@ function LookupTable() {
             </Table>
 
             <Box display="flex" justifyContent="center" mb={3} mt={3}>
-                <LookupModal/>
+                <LookupModal onSubmit={anlegenHandler}/>
             </Box>
 
 

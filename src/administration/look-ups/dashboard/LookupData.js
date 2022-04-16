@@ -9,8 +9,8 @@ function LookupData(props) {
     return (
         <TableRow>
             <TableCell align="center">{props.app}</TableCell>
-            <TableCell align="right">{props.api}</TableCell>
-            <TableCell align="right">
+            <TableCell align="center">{props.api}</TableCell>
+            <TableCell align="center">
                 <DeleteIcon sx={{cursor: "pointer"}}/>
                 <EditIcon/>
             </TableCell>

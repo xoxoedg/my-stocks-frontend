@@ -9,29 +9,28 @@ import LookupModal from "../../lookupModal/LookupModal";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import LookupData from "./LookupData";
+import RequestHandler from "../../common/RequestHandler";
 
 
 function LookupTable() {
     const [lookupRequestData, setLookupRequestData] = useState([])
     const url = "http://127.0.0.1:5000/administration/lookups"
     const url2 = "http://127.0.0.1:5000/administration/lookups/anlegen"
-
+    const requestHandler = new RequestHandler()
 
     useEffect(() => {
-        axios.get(url).then(response => setLookupRequestData(response.data));
+        requestHandler.handleLookupGetRequest().then(response => setLookupRequestData(response.data));
         }, [])
 
     function anlegenHandler(neuerEintrag) {
-        axios.post(url2, neuerEintrag);
+        requestHandler.handleLookupPostRequest(neuerEintrag).then(response => null)
         setLookupRequestData(prevLookupRequestData => {
             return [...prevLookupRequestData, neuerEintrag]
         })
     }
 
     function loeschenHandler(eintragToDelete) {
-
-        const url3 = `http://127.0.0.1:5000/administration/lookups/loeschen/${eintragToDelete}`
-        axios.delete(url3).then(response => console.log(response))
+        requestHandler.handleLookupDeleteRequest(eintragToDelete).then(response => null)
         setLookupRequestData(lookupRequestData.filter(lookup => lookup.app_name !== eintragToDelete))
     }
 

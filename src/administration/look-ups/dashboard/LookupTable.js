@@ -35,6 +35,14 @@ function LookupTable() {
         return requestHandler.handleSpecificLookupGetRequest(appName)
     }
 
+    function editHandler(lookupEntry, app) {
+        requestHandler.handleEditLookupRequest(lookupEntry)
+        setLookupRequestData( lookupRequestData.map(lookup => lookup.app_name === app ? lookupEntry:lookup))
+
+
+
+    }
+
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin: "auto", marginTop: 20, padding: "3%"}} center>
             <Table sx={{minWidth: 400,}} aria-label="simple table">
@@ -50,6 +58,7 @@ function LookupTable() {
                     {lookupRequestData.map(lookup => <LookupData
                         onDelete={loeschenHandler}
                         onPrefill={preFillEditHandler}
+                        onEdit={editHandler}
                         key={lookup.app_name}
                         app={lookup.app_name}
                         api={lookup.api_name}/>)}

@@ -10,8 +10,8 @@ function LookupData(props) {
         props.onDelete(props.app)
     }
 
-    function editHandler() {
-
+    function editHandler(lookupEntry, app) {
+        props.onEdit(lookupEntry, app)
     }
 
     function prefillHandler(appName) {
@@ -24,7 +24,11 @@ function LookupData(props) {
             <TableCell align="center">{props.api}</TableCell>
             <TableCell align="center">
                 <DeleteIcon onClick={deleteHandler} sx={{cursor: "pointer"}}/>
-                <LookupEditModal app={props.app} onPrefill={prefillHandler}/>
+                <LookupEditModal
+                    app={props.app}
+                    onPrefill={prefillHandler}
+                    onEdit={editHandler}
+                />
             </TableCell>
         </TableRow>
 

@@ -15,7 +15,6 @@ function LookupEditModal(props) {
     const [open, setOpen] = useState(false);
 
 
-
     const handleClickOpen = () => {
         console.log(props.app)
         props.onPrefill(props.app).then(prefillData => {
@@ -33,11 +32,12 @@ function LookupEditModal(props) {
 
 
     function onSubmitHandler(event) {
+        event.preventDefault()
         const requestBody = {
             app_name: appName,
             api_name: apiName,
         }
-        props.onSubmit(requestBody)
+        props.onEdit(requestBody, props.app)
     }
 
     function apiNameOnChangeHandler(event) {
@@ -50,8 +50,7 @@ function LookupEditModal(props) {
 
     return (
         <>
-            <EditIcon onClick={handleClickOpen}/>
-
+            <EditIcon onClick={handleClickOpen} sx={{cursor: "pointer"}}/>
 
 
             <Dialog open={open} onClose={handleClose}

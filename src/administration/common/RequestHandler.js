@@ -5,7 +5,7 @@ import axios from "axios";
 class RequestHandler {
     constructor() {
         this.deleteUrl = "http://127.0.0.1:5000/administration/lookups/loeschen/";
-        this.editUrl = "";
+        this.editUrl = "http://127.0.0.1:5000/administration/lookups/bearbeiten";
         this.getUrl = "http://127.0.0.1:5000/administration/lookups"
         this.postUrl = "http://127.0.0.1:5000/administration/lookups/anlegen"
         this.specificGetUrl ="http://127.0.0.1:5000/administration/lookups/"
@@ -26,7 +26,10 @@ class RequestHandler {
 
     handleSpecificLookupGetRequest(appName) {
         return axios.get(this.specificGetUrl + appName)
+    }
 
+    handleEditLookupRequest(lookupEntry) {
+        return axios.put(this.editUrl, lookupEntry)
     }
 
 }

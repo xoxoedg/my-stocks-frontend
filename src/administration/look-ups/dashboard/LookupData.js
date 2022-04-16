@@ -6,12 +6,17 @@ import TableRow from "@mui/material/TableRow";
 
 function LookupData(props) {
 
+    function deleteHandler() {
+        console.log(props.app)
+        props.onDelete(props.app)
+    }
+
     return (
         <TableRow>
             <TableCell align="center">{props.app}</TableCell>
             <TableCell align="center">{props.api}</TableCell>
             <TableCell align="center">
-                <DeleteIcon sx={{cursor: "pointer"}}/>
+                <DeleteIcon onClick={deleteHandler} sx={{cursor: "pointer"}}/>
                 <EditIcon/>
             </TableCell>
         </TableRow>

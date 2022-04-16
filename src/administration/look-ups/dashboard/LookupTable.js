@@ -16,6 +16,7 @@ function LookupTable() {
     const url = "http://127.0.0.1:5000/administration/lookups"
     const url2 = "http://127.0.0.1:5000/administration/lookups/anlegen"
 
+
     useEffect(() => {
         axios.get(url).then(response => setLookupRequestData(response.data));
         }, [])
@@ -27,7 +28,14 @@ function LookupTable() {
         })
     }
 
-    console.log(lookupRequestData)
+    function loeschenHandler(eintragToDelete) {
+
+        const url3 = `http://127.0.0.1:5000/administration/lookups/loeschen/${eintragToDelete}`
+        axios.delete(url3).then(response => console.log(response))
+        setLookupRequestData(lookupRequestData.filter(lookup => lookup.app_name !== eintragToDelete))
+    }
+
+
 
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin:"auto", marginTop: 20, padding:"3%"}} center>
@@ -42,6 +50,7 @@ function LookupTable() {
                 <TableBody>
 
                     {lookupRequestData.map(lookup => <LookupData
+                        onDelete={loeschenHandler}
                         key={lookup.app_name}
                         app={lookup.app_name}
                         api={lookup.api_name}/>)}

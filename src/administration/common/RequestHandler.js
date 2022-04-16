@@ -8,6 +8,7 @@ class RequestHandler {
         this.editUrl = "";
         this.getUrl = "http://127.0.0.1:5000/administration/lookups"
         this.postUrl = "http://127.0.0.1:5000/administration/lookups/anlegen"
+        this.specificGetUrl ="http://127.0.0.1:5000/administration/lookups/"
     }
 
     handleLookupPostRequest(neuerEintrag) {
@@ -21,6 +22,11 @@ class RequestHandler {
 
     handleLookupGetRequest() {
         return axios.get(this.getUrl)
+    }
+
+    handleSpecificLookupGetRequest(appName) {
+        return axios.get(this.specificGetUrl + appName)
+
     }
 
 }

@@ -1,14 +1,21 @@
 import {TableCell} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import TableRow from "@mui/material/TableRow";
+import LookupEditModal from "../../lookupModal/LookupEditModal";
 
 
 function LookupData(props) {
 
     function deleteHandler() {
-        console.log(props.app)
         props.onDelete(props.app)
+    }
+
+    function editHandler() {
+
+    }
+
+    function prefillHandler(appName) {
+        return props.onPrefill(appName)
     }
 
     return (
@@ -17,7 +24,7 @@ function LookupData(props) {
             <TableCell align="center">{props.api}</TableCell>
             <TableCell align="center">
                 <DeleteIcon onClick={deleteHandler} sx={{cursor: "pointer"}}/>
-                <EditIcon/>
+                <LookupEditModal app={props.app} onPrefill={prefillHandler}/>
             </TableCell>
         </TableRow>
 

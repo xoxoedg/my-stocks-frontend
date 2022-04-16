@@ -1,4 +1,3 @@
-import axios from "axios";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {useState} from "react";
 import {Grid} from "@mui/material";
 
-function LookupModal(props) {
+function LookupAddModal(props) {
     const [fullWidth, setFullWidth] = useState(true);
     const [appName, setAppName] = useState("")
     const [apiName, setApiName] = useState("")
@@ -23,10 +22,10 @@ function LookupModal(props) {
     };
 
 
-    function onSubmitHandler(event) {
+    function onSubmitHandler() {
         const requestBody = {
             app_name: appName,
-            api_name: appName,
+            api_name: apiName,
         }
         props.onSubmit(requestBody)
     }
@@ -41,9 +40,10 @@ function LookupModal(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} >
                 Open form dialog
             </Button>
+
 
             <Dialog open={open} onClose={handleClose}
                     fullWidth={fullWidth}>
@@ -83,4 +83,4 @@ function LookupModal(props) {
     );
 }
 
-export default LookupModal;
+export default LookupAddModal;

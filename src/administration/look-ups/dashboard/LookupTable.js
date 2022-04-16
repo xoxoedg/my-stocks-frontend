@@ -1,64 +1,83 @@
-import axios from "axios";
-import {useState, useEffect} from "react";
-import LookupData from "./LookupData";
-import LookupAddModal from "../../lookupModal/LookupAddModal";
-import M from "materialize-css";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import {Box, TableCell} from "@mui/material";
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-function LookupTable(props) {
-    const [data, setData] = useState([])
-    const url = "http://127.0.0.1:5000/administration/lookups";
-
-    useEffect(() => {
-        M.AutoInit();
-    }, [])
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import LookupModal from "../../lookupModal/LookupModal";
 
 
-    useEffect(() => {
-
-        axios.get(url).then(response => setData(response.data));
-    }, [])
-
-    function onDeleteHandler(lookupToDelete) {
-        setData(data.filter(lookup => lookup.app_name !== lookupToDelete))
-    }
-
-    function onEditHandler(data) {
-        props.onEdit(data)
-    }
+function LookupTable() {
 
     return (
-        <div className="container lookup-dashboard">
-            <div className="card">
-                <div className="card-content">
+        <TableContainer component={Paper} sx={{width: 0.5, margin:"auto", marginTop: 20, padding:"3%"}} center>
+            <Table sx={{minWidth: 400,  }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="center">Dessert (100g serving)</TableCell>
+                        <TableCell align="right">dasa</TableCell>
+                        <TableCell align="right">sss</TableCell>
+                        <TableCell align="right">123</TableCell>
+                        <TableCell align="right">Calories</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        <TableCell align="center">123123</TableCell>
+                        <TableCell align="right">123123</TableCell>
+                        <TableCell align="right">was</TableCell>
+                        <TableCell align="right">das</TableCell>
+                        <TableCell align="right">
+                            <DeleteIcon sx={{cursor: "pointer"}}/>
+                            <EditIcon/>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center">123123</TableCell>
+                        <TableCell align="right">123123</TableCell>
+                        <TableCell align="right">was</TableCell>
+                        <TableCell align="right">das</TableCell>
+                        <TableCell align="right">
+                            <DeleteIcon/>
+                            <EditIcon/>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center">123123</TableCell>
+                        <TableCell align="right">123123</TableCell>
+                        <TableCell align="right">was</TableCell>
+                        <TableCell align="right">das</TableCell>
+                        <TableCell align="right">
+                            <DeleteIcon/>
+                            <EditIcon/>
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center">123123</TableCell>
+                        <TableCell align="right">123123</TableCell>
+                        <TableCell align="right">was</TableCell>
+                        <TableCell align="right">das</TableCell>
+                        <TableCell align="right">
+                            <DeleteIcon/>
+                            <EditIcon/>
+                        </TableCell>
+                    </TableRow>
 
-                    <table className="striped">
-                        <thead>
-                        <tr>
-                            <th>Aktie</th>
-                            <th>Last Request</th>
-                            <th>Last Modified</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {data.map(lookup => <LookupData
-                            onEdit={onEditHandler}
-                            onDeleteLookup={onDeleteHandler}
-                            key={lookup.app_name}
-                            app={lookup.app_name}
-                            api={lookup.api_name}/>)}
-                        </tbody>
-                    </table>
+                </TableBody>
+            </Table>
 
-                    <LookupAddModal/>
-                    <div className="section center-align">
-                        <a className="btn-floating   modal-trigger btn-large waves-effect waves-light"
-                           href="#modal1"><i className="  material-icons ">add</i></a>
-                    </div>
-                </div>
+            <Box display="flex" justifyContent="center" mb={3} mt={3}>
+                <LookupModal/>
+            </Box>
 
-            </div>
-        </div>
-    )
+
+        </TableContainer>
+
+    );
 }
 
 export default LookupTable;

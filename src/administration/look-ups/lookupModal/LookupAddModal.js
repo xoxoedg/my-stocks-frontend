@@ -11,15 +11,9 @@ function LookupAddModal(props) {
     const [fullWidth, setFullWidth] = useState(true);
     const [appName, setAppName] = useState("")
     const [apiName, setApiName] = useState("")
-    const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+
 
 
     function onSubmitHandler(event) {
@@ -41,12 +35,10 @@ function LookupAddModal(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen} >
-                Open form dialog
-            </Button>
 
 
-            <Dialog open={open} onClose={handleClose}
+
+            <Dialog open={props.open} onClose={props.onClose}
                     fullWidth={fullWidth}>
                 <form onSubmit={onSubmitHandler}>
 
@@ -73,8 +65,8 @@ function LookupAddModal(props) {
 
 
                     <DialogActions>
-                        <Button onClick={handleClose} variant="contained">Cancel</Button>
-                        <Button type="submit" onClick={handleClose} variant="contained">Add</Button>
+                        <Button onClick={props.onClose} variant="contained">Cancel</Button>
+                        <Button type="submit" onClick={props.onClose} variant="contained">Add</Button>
                     </DialogActions>
 
                 </form>

@@ -5,19 +5,30 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import LookupAddModal from "../../lookupModal/LookupAddModal";
+import LookupAddModal from "./lookupModal/LookupAddModal";
 import {useEffect, useState} from "react";
 import LookupData from "./LookupData";
-import RequestHandler from "../../common/RequestHandler";
+import RequestHandler from "../common/RequestHandler";
+import Button from "@mui/material/Button";
 
 
-function LookupTable() {
+function LookupComponent() {
+    const [open, setOpen] = useState(false);
     const [lookupRequestData, setLookupRequestData] = useState([])
     const requestHandler = new RequestHandler()
 
     useEffect(() => {
         requestHandler.handleLookupGetRequest().then(response => setLookupRequestData(response.data));
     }, [])
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     function anlegenHandler(neuerEintrag) {
         requestHandler.handleLookupPostRequest(neuerEintrag).then(response => null)
@@ -69,7 +80,10 @@ function LookupTable() {
             </Table>
 
             <Box display="flex" justifyContent="center" mb={3} mt={3}>
-                <LookupAddModal onSubmit={anlegenHandler}/>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    Open form dialog
+                </Button>
+                <LookupAddModal onSubmit={anlegenHandler}  open={open} onClose={handleClose}/>
             </Box>
 
 
@@ -78,4 +92,4 @@ function LookupTable() {
     );
 }
 
-export default LookupTable;
+export default LookupComponent;

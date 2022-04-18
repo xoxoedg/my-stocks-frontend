@@ -1,13 +1,13 @@
 import NavigationBar from "./administration/navigation/NavigationBar";
-import LookupTable from "./administration/look-ups/dashboard/LookupTable";
 import {CssBaseline} from "@mui/material";
+import AdministrationPage from "./administration/AdministrationPage";
 
 function App() {
   return (
     <div className="App">
         <NavigationBar/>
         <CssBaseline />
-        <LookupTable/>
+        <AdministrationPage/>
     </div>
   );
 }

@@ -13,9 +13,6 @@ function LookupAddModal(props) {
     const [apiName, setApiName] = useState("")
 
 
-
-
-
     function onSubmitHandler(event) {
         event.preventDefault();
         const requestBody = {

@@ -9,6 +9,7 @@ function LookupDataProvider(props) {
     useEffect(() => {
         requestHandler.handleLookupGetRequest().then(response => setLookupRequestData(response.data));
     }, [])
+
     function anlegenHandler(neuerEintrag) {
         requestHandler.handleLookupPostRequest(neuerEintrag).then(response => null)
         setLookupRequestData(prevLookupRequestData => {

@@ -12,24 +12,6 @@ function LookupEditModal(props) {
     const [fullWidth, setFullWidth] = useState(true);
     const [appName, setAppName] = useState("")
     const [apiName, setApiName] = useState("")
-    const [open, setOpen] = useState(false);
-
-
-    const handleClickOpen = () => {
-
-        props.onPrefill(props.app).then(prefillData => {
-            console.log(prefillData)
-            setApiName(prefillData.data.api_name)
-            setAppName(prefillData.data.app_name)
-        })
-
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
 
     function onSubmitHandler(event) {
         event.preventDefault()
@@ -38,7 +20,7 @@ function LookupEditModal(props) {
             app_name: appName,
             api_name: apiName,
         }
-        props.onEdit(requestBody, props.app)
+        props.onSubmit(requestBody, props.app)
     }
 
     function apiNameOnChangeHandler(event) {
@@ -51,10 +33,7 @@ function LookupEditModal(props) {
 
     return (
         <>
-            <EditIcon onClick={handleClickOpen} sx={{cursor: "pointer"}}/>
-
-
-            <Dialog open={open} onClose={handleClose}
+            <Dialog open={props.open} onClose={props.onClose}
                     fullWidth={fullWidth}>
                 <form onSubmit={onSubmitHandler}>
 
@@ -83,8 +62,8 @@ function LookupEditModal(props) {
 
 
                     <DialogActions>
-                        <Button onClick={handleClose} variant="contained">Cancel</Button>
-                        <Button type="submit" onClick={handleClose} variant="contained">Add</Button>
+                        <Button onClick={props.onClose} variant="contained">Cancel</Button>
+                        <Button type="submit" onClick={props.onClose} variant="contained">Add</Button>
                     </DialogActions>
 
                 </form>

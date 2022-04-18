@@ -11,18 +11,34 @@ import LookupData from "./LookupData";
 
 import Button from "@mui/material/Button";
 import LookupContext from "./data-store/lookup-context";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import LookupEditModal from "./lookupModal/LookupEditModal";
 
 
 function LookupComponent() {
-    const [open, setOpen] = useState(false);
+    const [openAddModal, setAddModalOpen] = useState(false);
+    const [openEditModal, setEditModalOpen] = useState(false);
+
     const lookupContext = useContext(LookupContext)
-    const handleClickOpen = () => {
-        setOpen(true);
+
+    const handleClickAddModalOpen = () => {
+        setAddModalOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleAddModalClose = () => {
+        setAddModalOpen(false);
     };
+
+    const handleClickEditModalOpen = (event) => {
+        console.log(event.target.parentElement.parentElement.key)
+        setEditModalOpen(true);
+    };
+
+    const handleEditModalClose = () => {
+        setEditModalOpen(false);
+    };
+
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin: "auto", marginTop: 20, padding: "3%"}} center>
             <Table sx={{minWidth: 400,}} aria-label="simple table">
@@ -34,22 +50,30 @@ function LookupComponent() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {lookupContext.requestData.map(lookup=> <LookupData
-                        onDelete={lookupContext.onLoeschen}
-                        onPrefill={lookupContext.onPrefill}
-                        onEdit={lookupContext.onEdit}
-                        key={lookup.app_name}
-                        app={lookup.app_name}
-                        api={lookup.api_name}/>)}
+
+                    {
+                        lookupContext.requestData.map(data =>
+                            <TableRow key={data.app_name}>
+                                <TableCell align="center">{data.app_name}</TableCell>
+                                <TableCell align="center">{data.api_name}</TableCell>
+                                <TableCell align="center">
+                                    <DeleteIcon onClick={lookupContext.onLoeschen} sx={{cursor: "pointer"}}/>
+                                    <EditIcon onClick={handleClickEditModalOpen} sx={{cursor: "pointer"}}/>
+                                </TableCell>
+                            </TableRow>)
+                    }
+
                 </TableBody>
             </Table>
             <Box display="flex" justifyContent="center" mb={3} mt={3}>
-                <Button variant="outlined" onClick={handleClickOpen}>
+                <Button variant="outlined" onClick={handleClickAddModalOpen}>
                     Open form dialog
                 </Button>
-                <LookupAddModal onSubmit={lookupContext.onAnlegen}  open={open} onClose={handleClose}/>
+                <LookupAddModal onSubmit={lookupContext.onAnlegen} open={openAddModal} onClose={handleAddModalClose}/>
+                <LookupEditModal onPrefill={lookupContext.onPrefill} app={lookupContext.requestData.app_name} onSubmit={lookupContext.onEdit} open={openEditModal} onClose={handleEditModalClose}/>
             </Box>
         </TableContainer>
     );
 }
+
 export default LookupComponent;

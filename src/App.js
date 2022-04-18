@@ -3,13 +3,15 @@ import {CssBaseline} from "@mui/material";
 import AdministrationPage from "./administration/AdministrationPage";
 
 function App() {
-  return (
-    <div className="App">
-        <NavigationBar/>
-        <CssBaseline />
-        <AdministrationPage/>
-    </div>
-  );
+    return (
+        <div className="App">
+            <NavigationBar/>
+            <CssBaseline/>
+
+                <AdministrationPage/>
+
+        </div>
+    );
 }
 
 export default App;

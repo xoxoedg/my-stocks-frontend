@@ -4,9 +4,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Grid} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 
 function LookupEditModal(props) {
     const [fullWidth, setFullWidth] = useState(true);
@@ -17,11 +16,11 @@ function LookupEditModal(props) {
     function onSubmitHandler(event) {
         event.preventDefault()
         const requestBody = {
-            old_app_name: props.app,
+            old_app_name: props.clickedAktie.app_name,
             app_name: appName,
             api_name: apiName,
         }
-        props.onSubmit(requestBody, props.app)
+        props.onSubmit(requestBody, props.clickedAktie.app_name)
     }
 
     function apiNameOnChangeHandler(event) {
@@ -32,7 +31,6 @@ function LookupEditModal(props) {
         setAppName(event.target.value)
     }
 
-    console.log(props.specificData)
 
     return (
         <>
@@ -46,7 +44,7 @@ function LookupEditModal(props) {
                         <Grid container spacing={3} direction="column" sx={{marginTop: "3px"}}>
                             <Grid item xs={12} xm={12} xl={12}>
                                 <TextField
-                                    value={props.specificData.api_name}
+                                    defaultValue={props.specificData.api_name}
                                     label="Api Name"
                                     variant="outlined"
                                     fullWidth

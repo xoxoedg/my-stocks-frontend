@@ -20,6 +20,7 @@ function LookupComponent() {
     const [openAddModal, setAddModalOpen] = useState(false);
     const [openEditModal, setEditModalOpen] = useState(false);
     const [lookupRequestspecificData, setLookupRequestSpecificData] = useState({})
+    const [clickedAktie, setClickedAktie] = useState("")
 
 
     const lookupContext = useContext(LookupContext)
@@ -37,6 +38,7 @@ function LookupComponent() {
         lookupContext.onPrefill(lookup.app_name).then(res => {
             setLookupRequestSpecificData(res.data)
             setEditModalOpen(true)})
+        setClickedAktie(lookup.app_name)
     };
 
     const handleEditModalClose = () => {
@@ -56,8 +58,7 @@ function LookupComponent() {
                 </TableHead>
                 <TableBody>
 
-                    {
-                        lookupContext.requestData.map(data =>
+                    {lookupContext.requestData.map(data =>
                             <TableRow key={data.app_name}>
                                 <TableCell align="center">{data.app_name}</TableCell>
                                 <TableCell align="center">{data.api_name}</TableCell>
@@ -77,7 +78,7 @@ function LookupComponent() {
                     Open form dialog
                 </Button>
                 <LookupAddModal onSubmit={lookupContext.onAnlegen} open={openAddModal} onClose={handleAddModalClose}/>
-                <LookupEditModal specificData={lookupRequestspecificData} onSubmit={lookupContext.onEdit}
+                <LookupEditModal clickedAktie={clickedAktie} specificData={lookupRequestspecificData} onSubmit={lookupContext.onEdit}
                                  open={openEditModal} onClose={handleEditModalClose}/>
             </Box>
         </TableContainer>

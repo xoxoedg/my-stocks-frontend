@@ -19,6 +19,8 @@ import LookupEditModal from "./lookupModal/LookupEditModal";
 function LookupComponent() {
     const [openAddModal, setAddModalOpen] = useState(false);
     const [openEditModal, setEditModalOpen] = useState(false);
+    const [lookupRequestspecificData, setLookupRequestSpecificData] = useState({})
+
 
     const lookupContext = useContext(LookupContext)
 
@@ -30,14 +32,17 @@ function LookupComponent() {
         setAddModalOpen(false);
     };
 
-    const handleClickEditModalOpen = (event) => {
-        console.log(event.target.parentElement.parentElement.key)
-        setEditModalOpen(true);
+
+    const handleClickEditModalOpen = (lookup) => {
+        lookupContext.onPrefill(lookup.app_name).then(res => {
+            setLookupRequestSpecificData(res.data)
+            setEditModalOpen(true)})
     };
 
     const handleEditModalClose = () => {
         setEditModalOpen(false);
     };
+
 
     return (
         <TableContainer component={Paper} sx={{width: 0.5, margin: "auto", marginTop: 20, padding: "3%"}} center>
@@ -57,8 +62,10 @@ function LookupComponent() {
                                 <TableCell align="center">{data.app_name}</TableCell>
                                 <TableCell align="center">{data.api_name}</TableCell>
                                 <TableCell align="center">
-                                    <DeleteIcon onClick={lookupContext.onLoeschen} sx={{cursor: "pointer"}}/>
-                                    <EditIcon onClick={handleClickEditModalOpen} sx={{cursor: "pointer"}}/>
+                                    <DeleteIcon onClick={() => lookupContext.onLoeschen(data.app_name)}
+                                                sx={{cursor: "pointer"}}/>
+                                    <EditIcon
+                                        onClick={() => handleClickEditModalOpen(data)} sx={{cursor: "pointer"}}/>
                                 </TableCell>
                             </TableRow>)
                     }
@@ -70,7 +77,8 @@ function LookupComponent() {
                     Open form dialog
                 </Button>
                 <LookupAddModal onSubmit={lookupContext.onAnlegen} open={openAddModal} onClose={handleAddModalClose}/>
-                <LookupEditModal onPrefill={lookupContext.onPrefill} app={lookupContext.requestData.app_name} onSubmit={lookupContext.onEdit} open={openEditModal} onClose={handleEditModalClose}/>
+                <LookupEditModal specificData={lookupRequestspecificData} onSubmit={lookupContext.onEdit}
+                                 open={openEditModal} onClose={handleEditModalClose}/>
             </Box>
         </TableContainer>
     );

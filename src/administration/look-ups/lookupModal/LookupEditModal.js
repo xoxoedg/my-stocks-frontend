@@ -13,6 +13,7 @@ function LookupEditModal(props) {
     const [appName, setAppName] = useState("")
     const [apiName, setApiName] = useState("")
 
+
     function onSubmitHandler(event) {
         event.preventDefault()
         const requestBody = {
@@ -31,6 +32,8 @@ function LookupEditModal(props) {
         setAppName(event.target.value)
     }
 
+    console.log(props.specificData)
+
     return (
         <>
             <Dialog open={props.open} onClose={props.onClose}
@@ -43,7 +46,7 @@ function LookupEditModal(props) {
                         <Grid container spacing={3} direction="column" sx={{marginTop: "3px"}}>
                             <Grid item xs={12} xm={12} xl={12}>
                                 <TextField
-                                    value={apiName}
+                                    value={props.specificData.api_name}
                                     label="Api Name"
                                     variant="outlined"
                                     fullWidth
@@ -52,7 +55,7 @@ function LookupEditModal(props) {
                             </Grid>
                             <Grid item xs={12} xm={12} xl={12}>
                                 <TextField
-                                    value={appName}
+                                    defaultValue={props.specificData.app_name}
                                     label="App Name"
                                     fullWidth
                                     onChange={appNameOnChangeHandler}/>

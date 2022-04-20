@@ -21,6 +21,7 @@ function LookupDataProvider(props) {
         setLookupRequestData(lookupRequestData.filter(lookup => lookup.app_name !== eintragToDelete))
     }
     function preFillEditHandler(appName) {
+        console.log(appName)
         return requestHandler.handleSpecificLookupGetRequest(appName)
     }
     function editHandler(lookupEntry, app) {

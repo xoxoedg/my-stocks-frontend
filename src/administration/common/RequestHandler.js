@@ -16,7 +16,6 @@ class RequestHandler {
     }
 
     handleLookupDeleteRequest(eintragToDelete) {
-        console.log(this.deleteUrl + eintragToDelete)
         return axios.delete(this.deleteUrl + eintragToDelete)
     }
 

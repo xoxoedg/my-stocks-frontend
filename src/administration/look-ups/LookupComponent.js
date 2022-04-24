@@ -38,7 +38,7 @@ function LookupComponent() {
         lookupContext.onPrefill(lookup.app_name).then(res => {
             setLookupRequestSpecificData(res.data)
             setEditModalOpen(true)})
-        setClickedAktie(lookup.app_name)
+        setClickedAktie(lookup.id)
     };
 
     const handleEditModalClose = () => {
@@ -59,11 +59,11 @@ function LookupComponent() {
                 <TableBody>
 
                     {lookupContext.requestData.map(data =>
-                            <TableRow key={data.app_name}>
+                            <TableRow key={data.id}>
                                 <TableCell align="center">{data.app_name}</TableCell>
                                 <TableCell align="center">{data.api_name}</TableCell>
                                 <TableCell align="center">
-                                    <DeleteIcon onClick={() => lookupContext.onLoeschen(data.app_name)}
+                                    <DeleteIcon onClick={() => lookupContext.onLoeschen(data.id)}
                                                 sx={{cursor: "pointer"}}/>
                                     <EditIcon
                                         onClick={() => handleClickEditModalOpen(data)} sx={{cursor: "pointer"}}/>

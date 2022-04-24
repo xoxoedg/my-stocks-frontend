@@ -16,7 +16,7 @@ function LookupEditModal(props) {
     function onSubmitHandler(event) {
         event.preventDefault()
         const requestBody = {
-            old_app_name: props.clickedAktie.app_name,
+            id: props.clickedAktie.id,
             app_name: appName,
             api_name: apiName,
         }

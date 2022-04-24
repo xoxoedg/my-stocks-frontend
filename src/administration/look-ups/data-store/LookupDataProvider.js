@@ -7,7 +7,11 @@ function LookupDataProvider(props) {
     const [lookupRequestData, setLookupRequestData] = useState([])
     const requestHandler = new RequestHandler()
     useEffect(() => {
-        requestHandler.handleLookupGetRequest().then(response => setLookupRequestData(response.data));
+        requestHandler.handleLookupGetRequest().then(response => {
+            setLookupRequestData(response.data)
+            console.log()
+        });
+
     }, [])
 
     function anlegenHandler(neuerEintrag) {
@@ -18,7 +22,8 @@ function LookupDataProvider(props) {
     }
     function loeschenHandler(eintragToDelete) {
         requestHandler.handleLookupDeleteRequest(eintragToDelete).then(response => null)
-        setLookupRequestData(lookupRequestData.filter(lookup => lookup.app_name !== eintragToDelete))
+        console.log(eintragToDelete)
+        setLookupRequestData(lookupRequestData.filter(lookup => lookup.id !== eintragToDelete))
     }
     function preFillEditHandler(appName) {
         return requestHandler.handleSpecificLookupGetRequest(appName)

@@ -1,13 +1,13 @@
 import React from "react";
-
+import AktienDataProvider from "./data-store/AktienDataProvider";
+import AktienComponent from "./AktienComponent";
 
 function AktienPage() {
     return (
         <React.Fragment>
-            {/*<LookupDataProvider>*/}
-            {/*    <LookupComponent/>*/}
-            {/*</LookupDataProvider>*/}
-            <h1>Aktien</h1>
+            <AktienDataProvider>
+                <AktienComponent/>
+            </AktienDataProvider>
         </React.Fragment>
     )
 

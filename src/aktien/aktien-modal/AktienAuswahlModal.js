@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {useContext, useState} from "react";
+import {useEffect, useState} from "react";
 import {Checkbox, TableCell} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,13 +11,18 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
-import AktienContext from "../data-store/AktienContext";
+import RequestHandler from "../RequestHandler";
 
 function AktienAuswahlModal(props) {
-    const [fullWidth, setFullWidth] = useState(true);
-    const [selectedAktien, setSelectedAktien] = useState("")
+    const [aktienAuswahl, setAktienAuswahl] = useState([])
 
-    const aktienContext = useContext(AktienContext)
+    const requestHandler = new RequestHandler()
+
+    useEffect(() => {
+        requestHandler.showAktienAuswahl().then(response => {
+            setAktienAuswahl(response.data)
+        });
+    }, [])
 
     function onSubmitHandler(event) {
         // event.preventDefault();
@@ -38,14 +43,14 @@ function AktienAuswahlModal(props) {
 
     return (
         <div>
-            <Dialog open={props.open} onClose={props.onClose} fullWidth={fullWidth}>
+            <Dialog open={props.open} onClose={props.onClose} wi>
                 <form onSubmit={onSubmitHandler}>
 
-                    <DialogTitle>Enter new Lookup</DialogTitle>
+                    <DialogTitle>Aktien zu Fundamentalanalyse hinzufügen</DialogTitle>
                     <DialogContent>
                         <TableContainer component={Paper}
-                                        sx={{width: 0.5, margin: "auto", marginTop: 20, padding: "3%"}} center>
-                            <Table sx={{minWidth: 400,}} aria-label="simple table">
+                                        sx={{width: 1, margin: "auto"}} center>
+                            <Table sx={{minWidth: 300,}} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Hinzufügen</TableCell>
@@ -53,15 +58,7 @@ function AktienAuswahlModal(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                        <TableRow>
-                                            <TableCell align="center">
-                                                <Checkbox defaultChecked/>
-                                            </TableCell>
-                                            <TableCell align="center">ABC</TableCell>
-                                        </TableRow>
-                                </TableBody>
-                                <TableBody>
-                                    {aktienContext.aktienAuswahl.map((aktie) =>
+                                    {aktienAuswahl.map((aktie) =>
                                         <TableRow key={aktie.name}>
                                             <TableCell align="center">
                                                 <Checkbox defaultChecked/>

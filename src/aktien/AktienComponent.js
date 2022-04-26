@@ -8,16 +8,11 @@ import AktienAuswahlModal from "./aktien-modal/AktienAuswahlModal";
 function AktienComponent() {
 
     const [modalOpen, setModalOpen] = useState(false);
-    const [aktienAuswahl, setAktienAuswahl] = useState({})
 
     const aktienContext = useContext(AktienContext)
 
     const openAktienAuswahl = () => {
-        aktienContext.onPrefill().then(res => {
-            console.log(res.data.toString())
-            setAktienAuswahl(res.data)
-            setModalOpen(true)
-        })
+        setModalOpen(true)
     };
 
     const closeAktienAuswahl = () => {
@@ -31,8 +26,7 @@ function AktienComponent() {
             </Button>
             <AktienAuswahlModal onSubmit={aktienContext.onSelect}
                                 open={modalOpen}
-                                onClose={closeAktienAuswahl}
-                                aktienAuswahl={aktienAuswahl}/>
+                                onClose={closeAktienAuswahl}/>
         </Box>
     );
 }

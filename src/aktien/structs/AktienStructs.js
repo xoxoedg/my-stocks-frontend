@@ -1,4 +1,4 @@
-class SelectedAktie {
+export class SelectedAktie {
 
     name = ""
 
@@ -8,4 +8,12 @@ class SelectedAktie {
 
 }
 
-export default SelectedAktie;
+export class AuswahlBestaetigenRequestDto {
+
+    selectedAktien = []
+
+    constructor(selectedAktien) {
+        this.selectedAktien = selectedAktien
+    }
+
+}

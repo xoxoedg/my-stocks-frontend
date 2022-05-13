@@ -22,9 +22,9 @@ function AktienComponent() {
     return (
         <Box display="flex" justifyContent="center" mb={3} mt={3}>
             <Button variant="outlined" onClick={openAktienAuswahl}>
-                Open form dialog
+                Aktien hinzufügen
             </Button>
-            <AktienAuswahlModal onSubmit={aktienContext.onSelect}
+            <AktienAuswahlModal onSubmit={aktienContext.auswahlBestaetigen}
                                 open={modalOpen}
                                 onClose={closeAktienAuswahl}/>
         </Box>

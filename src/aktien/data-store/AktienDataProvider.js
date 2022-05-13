@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import RequestHandler from "../RequestHandler";
 import AktienContext from "./AktienContext";
+import {AuswahlBestaetigenRequestDto} from "../structs/AktienStructs"
 
 
 function AktienDataProvider(props) {
@@ -13,10 +14,15 @@ function AktienDataProvider(props) {
         // });
     }, [])
 
+    function auswahlBestaetigen(ausgewaehlteAktien) {
+        const requestDto = new AuswahlBestaetigenRequestDto(ausgewaehlteAktien)
+        requestHandler.auswahlBestaetigen(requestDto).then(response => null)
+    }
 
     return (
         <AktienContext.Provider value={{
             selectedAktien: selectedAktien,
+            auswahlBestaetigen: auswahlBestaetigen
         }}>
             {props.children}
         </AktienContext.Provider>

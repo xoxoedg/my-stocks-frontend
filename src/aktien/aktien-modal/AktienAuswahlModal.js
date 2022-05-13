@@ -11,7 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import RequestHandler from "../RequestHandler";
-import SelectedAktie from "../structs/AktienStructs";
+import {SelectedAktie} from "../structs/AktienStructs";
 
 function AktienAuswahlModal(props) {
     const [aktienAuswahl, setAktienAuswahl] = useState([])
@@ -27,11 +27,7 @@ function AktienAuswahlModal(props) {
 
     function aktienHinzufuegen(event) {
         event.preventDefault();
-        const requestBody = {
-            app_name: "appName",
-            api_name: "apiName",
-        }
-        props.onSubmit(requestBody)
+        props.onSubmit(selectedAktien)
     }
 
     function toggleSelectedAktie(event, name) {
@@ -49,7 +45,7 @@ function AktienAuswahlModal(props) {
 
     return (
         <div>
-            <Dialog open={props.open} onClose={props.onClose} wi>
+            <Dialog open={props.open} onClose={props.onClose}>
                 <form onSubmit={aktienHinzufuegen}>
 
                     <DialogTitle>Aktien zu Fundamentalanalyse hinzufügen</DialogTitle>

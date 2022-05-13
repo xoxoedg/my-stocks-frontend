@@ -10,6 +10,10 @@ class RequestHandler {
         return axios.get(BASE_URL + "/aktien")
     }
 
+    auswahlBestaetigen(requestDto){
+        return axios.post(BASE_URL + "/aktien", requestDto)
+    }
+
 }
 
 export default RequestHandler;

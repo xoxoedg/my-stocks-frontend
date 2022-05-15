@@ -30,8 +30,8 @@ function AktienAuswahlModal(props) {
         props.onSubmit(selectedAktien)
     }
 
-    function toggleSelectedAktie(event, name) {
-        let selectedAktie = new SelectedAktie(name);
+    function toggleSelectedAktie(event, aktie) {
+        let selectedAktie = new SelectedAktie(aktie.lookup_id, aktie.name);
         if (event.target.checked) {
             setSelectedAktien(prevSelectedAktien => {
                 return [...prevSelectedAktien, selectedAktie]
@@ -60,7 +60,7 @@ function AktienAuswahlModal(props) {
                                                 <FormGroup>
                                                     <FormControlLabel
                                                         label={aktie.name}
-                                                        onChange={e => toggleSelectedAktie(e, aktie.name)}
+                                                        onChange={e => toggleSelectedAktie(e, aktie)}
                                                         control={<Checkbox/>}
                                                     />
                                                 </FormGroup>

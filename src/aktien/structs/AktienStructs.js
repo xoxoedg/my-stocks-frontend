@@ -1,8 +1,10 @@
 export class SelectedAktie {
 
+    lookup_id = null
     name = ""
 
-    constructor(name) {
+    constructor(lookup_id, name) {
+        this.lookup_id = lookup_id
         this.name = name
     }
 

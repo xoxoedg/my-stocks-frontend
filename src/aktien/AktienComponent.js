@@ -9,8 +9,6 @@ function AktienComponent() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const dummyList = ['a', 'b', 'c', 'd', 'e', 'f']
-
     const aktienContext = useContext(AktienContext)
 
     const openAktienAuswahl = () => {
@@ -35,9 +33,14 @@ function AktienComponent() {
             </Box>
             <Box display="flex" justifyContent="center" mb={3} mt={3}>
                 <ImageList sx={{width: 500, height: 450}} cols={3} rowHeight={164}>
-                    {dummyList.map((aktie) => (
-                        <ImageListItem key={aktie}>
-                            <Button>{aktie}</Button>
+                    {aktienContext.aktien.map((aktie) => (
+                        <ImageListItem key={aktie.name}>
+                            <Button>
+                                <p>{aktie.name}<br/>
+                                    {aktie.aktuellerPreis}<br/>
+                                    {aktie.naechsterQuarterly}
+                                </p>
+                            </Button>
                         </ImageListItem>
                     ))}
                 </ImageList>

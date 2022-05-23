@@ -1,3 +1,18 @@
+export class Aktie {
+
+    name = ""
+    aktuellerPreis = null
+    naechsterQuarterly = ""
+
+
+    constructor(name, aktuellerPreis, naechsterQuarterly) {
+        this.name = name;
+        this.aktuellerPreis = aktuellerPreis;
+        this.naechsterQuarterly = naechsterQuarterly;
+    }
+}
+
+
 export class SelectedAktie {
 
     lookup_id = null
